@@ -1,0 +1,37 @@
+version: '3'
+
+services: 
+  ypphp:
+    container_name: php
+    build: ./docker/php
+    volumes:
+      - ./server/yosepage:/var/www
+      - ~/etc/timezone:/etc/localtime:ro
+  
+  ypnginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./server/yosepage:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ~/etc/timezone:/etc/localtime:ro
+    depends_on: 
+      - ypphp
+
+  ypdb:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: yosepage
+      MYSQL_USER: yosepage
+      MYSQL_PASSWORD: yosepage
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./docker/db/data:/var/lib/mysql
+      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ~/etc/timezone:/etc/localtime:ro
+    ports:
+      - 3306:3306
