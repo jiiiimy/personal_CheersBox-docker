@@ -1,0 +1,8 @@
+setup:
+  addons:
+    - plan: cleardb
+      as: DATABASE
+build:
+  docker:
+    php: docker/php/Dockerfile
+    nginx: docker/nginx/Dockerfile
