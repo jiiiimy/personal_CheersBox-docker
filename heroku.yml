@@ -4,5 +4,5 @@ setup:
       as: DATABASE
 build:
   docker:
-    php: docker/php/Dockerfile
-    nginx: docker/nginx/Dockerfile
+    web: docker/php/Dockerfile
+    worker: docker/nginx/Dockerfile
