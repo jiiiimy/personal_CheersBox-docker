@@ -5,4 +5,4 @@ setup:
 build:
   docker:
     web: docker/php/Dockerfile
-    worker: docker/nginx/Dockerfile
+    # worker: docker/nginx/Dockerfile
