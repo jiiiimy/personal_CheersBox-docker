@@ -1,4 +1,4 @@
-FROM php:7.2-fpm 
+FROM php:7.3-fpm 
 COPY php.ini /usr/local/etc/php/conf.d/php.ini
 ENV APP_ROOT /var/www
 ENV LANG ja_JP.utf8
